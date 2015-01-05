@@ -1,0 +1,60 @@
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+.jumbotron {
+    text-align: center;
+}
+
+.back_for_entity {
+    /*background-image: url("../../images/backgrounds/barri_gotic_by_jpgmn.png");*/
+    background-color: #dcdcdc;
+}
+
+.facade_tile {
+    padding: 10px;
+    min-height: 300px;
+    border: 1px solid darkolivegreen;
+    background-color: #c6d6b4;
+    border-radius: 6px;
+}
+
+.facade_tile div {
+    text-align: center;
+}
+
+.btn-bottom {
+
+}
+
+.facade_description {
+    min-height: 100px;
+}
+
+.facade_title {
+    min-height: 150px;
+}
+
+table {
+    padding-top: 200px;
+}
+
+th {
+    text-align: center;
+}
+
+.vc {
+    width: 2px;
+    height: 20px;
+    background-color: #2b5c97;
+}
+
+
+
+
+
+
+/*.col-md-6 {
+    padding: 80px;
+}*/
