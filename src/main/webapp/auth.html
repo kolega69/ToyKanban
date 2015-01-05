@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <!-- Bootstrap core CSS -->
+  <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="bootstrap/css/custom.css" rel="stylesheet">
+  <link href="bootstrap/css/signin.css" rel="stylesheet">
+
+  <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<div class="container">
+
+  <form class="form-signin" role="form" action="auth" method="post">
+    <h2 class="form-signin-heading">Вход на сайт</h2>
+    <input type="hidden" name="action" value="sign_in">
+    <input type="email" id="inputEmail" class="form-control" placeholder="Email адрес" name="email" required autofocus>
+    <input type="password" id="inputPassword" class="form-control" placeholder="Пароль" name="password" required>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" value="remember-me"> Запомнить меня
+      </label>
+    </div>
+    <div class="alert alert-danger" id="wrong_signin" role="alert">
+       Введенные e-mail или пароль не верны!
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
+    <div class="vc vc1 center-block"></div>
+    <div><h5 id="or">ИЛИ</h5></div>
+    <div class="vc vc2 center-block"></div>
+
+  </form>
+
+
+  <button class="btn btn-danger center-block btn-toggle">Регистрация</button>
+
+  <form class="form-signup" role="form" method="post" action="auth">
+    <div class="vc vc3 center-block"></div>
+    <div><h5>ИЛИ</h5></div>
+    <div class="vc vc4 center-block"></div>
+
+    <h2 class="form-signin-heading">Регистрация</h2>
+    <input type="hidden" name="action" value="sign_up">
+    <input type="text" id="giveName" class="form-control" placeholder="Имя" name="name" required autofocus>
+    <input type="email" id="giveEmail" class="form-control" placeholder="Email адрес" name="email" required>
+    <input type="password" id="givePassword" class="form-control" placeholder="Пароль" name="password" required>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Зарегистрироваться</button>
+
+
+  </form>
+
+
+</div> <!-- /container -->
+
+
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
+<script>
+  $('.btn-toggle').click(function () {
+    var currentText = $(this).text();
+    if (currentText === "Регистрация") {
+      $(this).text("Войти");
+    } else {
+      $(this).text("Регистрация");
+    }
+    $('.form-signin').slideToggle('slow');
+    $('.form-signup').slideToggle('slow');
+  });
+
+  $('.form-signin').submit(function(e) {
+    var $form = $(this);
+    $.ajax({
+      url: $form.attr('action'),
+      type: $form.attr('method'),
+      data: $form.serialize(),
+      async: false
+    }).done(function (data) {
+      if ('fail' === data) {
+        e.preventDefault();
+        $('#wrong_signin').show();
+      }
+    });
+  });
+
+</script>
+
+</body>
+</html>
