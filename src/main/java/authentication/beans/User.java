@@ -1,4 +1,4 @@
-package beans;
+package authentication.beans;
 
 import java.time.LocalDate;
 

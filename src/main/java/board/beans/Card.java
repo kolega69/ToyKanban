@@ -1,4 +1,4 @@
-package beans;
+package board.beans;
 
 public class Card {
 	
