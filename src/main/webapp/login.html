@@ -31,7 +31,7 @@
         <input type="checkbox" value="remember-me"> Запомнить меня
       </label>
     </div>
-    <div class="alert alert-danger" id="wrong_signin" role="alert">
+    <div class="alert alert-danger" id="wrong-signin" role="alert">
        Введенные e-mail или пароль не верны!
     </div>
     <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
@@ -51,10 +51,13 @@
 
     <h2 class="form-signin-heading">Регистрация</h2>
     <input type="hidden" name="action" value="sign_up">
-    <input type="text" id="giveName" class="form-control" placeholder="Имя" name="name" required autofocus>
+    <input type="text" id="giveName" class="form-control" placeholder="Имя 3 симв. мин." name="name" required autofocus>
     <input type="email" id="giveEmail" class="form-control" placeholder="Email адрес" name="email" required>
-    <input type="password" id="givePassword" class="form-control" placeholder="Пароль" name="password" required>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Зарегистрироваться</button>
+    <input type="password" id="givePassword" class="form-control" placeholder="Пароль 6 симв. мин." name="password" required>
+    <div class="alert alert-danger" id="email-exists" role="alert">
+        Данный e-mail уже зарегестрирован!
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" id="registerBtn" type="submit" disabled="disabled">Зарегистрироваться</button>
 
 
   </form>
@@ -69,6 +72,7 @@
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
 <script>
+  
   $('.btn-toggle').click(function () {
     var currentText = $(this).text();
     if (currentText === "Регистрация") {
@@ -88,11 +92,41 @@
       data: $form.serialize(),
       async: false
     }).done(function (data) {
-      if ('fail' === data) {
+      if ('false' === data) {
         e.preventDefault();
-        $('#wrong_signin').show();
+        $('#wrong-signin').show();
       }
     });
+  });
+  
+  //todo proper fields validation
+  $('.form-signup').keyup(function() {
+	  var $form = $(this);
+	  var ok = false;
+	  var nameLen = $('#giveName').val().length;
+	  var passLen = $('#givePassword').val().length;
+	  if (nameLen < 3 || passLen < 6) {
+		$('#registerBtn').attr("disabled", "disabled"); 
+	  } else {
+		$('#registerBtn').removeAttr("disabled");
+	  }
+	  
+  });
+  
+  $('#giveEmail').keyup(function(){
+	  var url = $('.form-signup').attr("action");
+	  var email = $(this).val();
+	  var data = "email=" + email + "&action=check_email&password=111";
+	  $.post(url, data).done(function(data) {
+		  if ('false' === data) {
+			  $('#registerBtn').attr("disabled", "disabled");
+			  $('#email-exists').show();
+		  } else {
+			  $('#registerBtn').removeAttr("disabled");
+			  $('#email-exists').hide();
+		  }
+	  })
+	  
   });
 
 </script>

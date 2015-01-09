@@ -1,14 +1,19 @@
 package authentication.beans;
 
-import java.time.LocalDate;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+import board.beans.Card;
 
 public class User {
 	
 	private String email;
 	private String name;
-	private LocalDate creationDate;
+	private Date creationDate;
+	private Map<String, List<Card>> cards;
 	
-	public User(String name, String email, LocalDate creationDate) {
+	public User(String name, String email, Date creationDate) {
 		this.name = name;
 		this.email = email;
 		this.creationDate = creationDate;
@@ -26,7 +31,17 @@ public class User {
 		this.name = name;
 	}
 
-	public LocalDate getCreationDate() {
+	public Date getCreationDate() {
 		return creationDate;
 	}
+
+	public Map<String, List<Card>> getCards() {
+		return cards;
+	}
+
+	public void setCards(Map<String, List<Card>> cards) {
+		this.cards = cards;
+	}
+	
+	
 }

@@ -56,7 +56,8 @@ form div h5 {
 }
 
 .form-signup,
-#wrong_signin {
+#wrong-signin,
+#email-exists {
     display: none;
 }
 
