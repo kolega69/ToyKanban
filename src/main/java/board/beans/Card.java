@@ -1,17 +1,21 @@
 package board.beans;
 
+import java.util.Date;
+
 public class Card {
 	
 	private String name;
 	private String description;
 	private String priority;
 	private String phase;
+	private Date creationDate;
 	
 	public Card(String name, String description, String priority, String phase) {
 		this.name = name;
 		this.description = description;
 		this.priority = priority;
 		this.phase = phase;
+		creationDate = new Date();
 	}
 
 	public String getName() {
@@ -45,5 +49,15 @@ public class Card {
 	public void setPhase(String phase) {
 		this.phase = phase;
 	}
+
+	public Date getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
+	
+	
 
 }
