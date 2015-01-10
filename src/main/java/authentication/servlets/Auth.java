@@ -62,8 +62,6 @@ public class Auth extends HttpServlet {
 					session.setAttribute("user", user);
 					session.setAttribute(action, "showBoard");
 					response.sendRedirect("board");
-//					getServletContext().getRequestDispatcher("/board").forward(request, response);
-					
 				}
 				break;
 			case "sign_up":

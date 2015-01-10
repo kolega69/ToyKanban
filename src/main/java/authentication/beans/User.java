@@ -1,5 +1,6 @@
 package authentication.beans;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,7 @@ public class User {
 		this.name = name;
 		this.email = email;
 		this.creationDate = creationDate;
+		cards = Collections.emptyMap();
 	}
 
 	public String getEmail() {

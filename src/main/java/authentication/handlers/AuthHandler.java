@@ -51,7 +51,7 @@ public class AuthHandler {
 		Date creationDate = new Date();
 		
 		user = new BasicDBObject("name", userName)
-			.append("email", userEmail)
+			.append("_id", userEmail)
 			.append("hash", hash)
 			.append("date", creationDate);
 		users.insert(user);
@@ -61,22 +61,26 @@ public class AuthHandler {
 	}
 	
 	public BasicDBObject getUserByEmail(String userEmail) {
-		DBObject obj = users.findOne(new BasicDBObject("email", userEmail));
+		DBObject obj = users.findOne(new BasicDBObject("_id", userEmail));
 		return obj == null ? null : (BasicDBObject)obj; 
 	}
 	
 	private User retrieveUser(BasicDBObject DBuser) {
-		Map<String, List<Card>> userCards = new HashMap<>();
+		
 			
 		String name = DBuser.getString("name");
-		String email = DBuser.getString("email");
+		String email = DBuser.getString("_id");
 		Date creationDate = DBuser.getDate("date"); 
+		User user = new User(name, email, creationDate);
 		
-		BasicDBList cards = (BasicDBList)DBuser.get("cards");
+		BasicDBList cards = (BasicDBList) (DBuser.get("cards") == null ? null : DBuser.get("cards")) ;
+		if (cards == null || cards.isEmpty()) return user;
+		
+		Map<String, List<Card>> userCards = new HashMap<>();
 		for (Object card : cards) {
 			BasicDBObject c = (BasicDBObject)card;
-			String phase = c.getString("pase");
-			String cardName = c.getString("name");
+			String phase = c.getString("phase");
+			String cardName = c.getString("cardName");
 			Date cardDate = c.getDate("cardDate");
 			String description = c.getString("description");
 			String priority = c.getString("priority");
@@ -91,8 +95,6 @@ public class AuthHandler {
 			list.add(userCard);
 			userCards.put(phase, list);
 		}	
-		
-		User user = new User(name, email, creationDate);
 		user.setCards(userCards);
 		
 		return user;
