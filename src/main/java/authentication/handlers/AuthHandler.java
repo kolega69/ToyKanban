@@ -12,6 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import authentication.beans.User;
+import board.beans.Board;
 import board.beans.Card;
 
 import com.mongodb.BasicDBList;
@@ -72,11 +73,11 @@ public class AuthHandler {
 		String email = DBuser.getString("_id");
 		Date creationDate = DBuser.getDate("date"); 
 		User user = new User(name, email, creationDate);
+		Board board = user.getBoard();
 		
 		BasicDBList cards = (BasicDBList) (DBuser.get("cards") == null ? null : DBuser.get("cards")) ;
 		if (cards == null || cards.isEmpty()) return user;
 		
-		Map<String, List<Card>> userCards = new HashMap<>();
 		for (Object card : cards) {
 			BasicDBObject c = (BasicDBObject)card;
 			String phase = c.getString("phase");
@@ -88,14 +89,8 @@ public class AuthHandler {
 			Card userCard = new Card(cardName, description, priority, phase);
 			userCard.setCreationDate(cardDate);
 			
-			List<Card> list = userCards.get(phase);
-			if (list == null) {
-				list = new LinkedList<>();
-			}
-			list.add(userCard);
-			userCards.put(phase, list);
+			board.add(userCard);
 		}	
-		user.setCards(userCards);
 		
 		return user;
 	}

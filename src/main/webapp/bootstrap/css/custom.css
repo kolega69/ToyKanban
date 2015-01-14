@@ -50,7 +50,18 @@ th {
     background-color: #2b5c97;
 }
 
+.collapsible {
+	display: none;
+}
 
+.collapse-col {
+	text-align: right;
+}
+
+.date-table {
+	width: 100%;
+	margin-bottom: -10px;
+}
 
 
 

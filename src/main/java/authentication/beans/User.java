@@ -1,10 +1,11 @@
 package authentication.beans;
 
-import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import board.beans.Board;
 import board.beans.Card;
 
 public class User {
@@ -12,13 +13,13 @@ public class User {
 	private String email;
 	private String name;
 	private Date creationDate;
-	private Map<String, List<Card>> cards;
+	private Board board;
 	
 	public User(String name, String email, Date creationDate) {
 		this.name = name;
 		this.email = email;
 		this.creationDate = creationDate;
-		cards = Collections.emptyMap();
+		board = new Board();
 	}
 
 	public String getEmail() {
@@ -37,13 +38,8 @@ public class User {
 		return creationDate;
 	}
 
-	public Map<String, List<Card>> getCards() {
-		return cards;
+	public Board getBoard() {
+		return board;
 	}
-
-	public void setCards(Map<String, List<Card>> cards) {
-		this.cards = cards;
-	}
-	
 	
 }

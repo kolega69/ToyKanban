@@ -60,7 +60,7 @@ public class Auth extends HttpServlet {
 				} else {
 					HttpSession session = request.getSession();
 					session.setAttribute("user", user);
-					session.setAttribute(action, "showBoard");
+					session.setAttribute("action", "showBoard");
 					response.sendRedirect("board");
 				}
 				break;
