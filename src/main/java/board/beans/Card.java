@@ -13,23 +13,33 @@ public class Card {
 	private Phase phase = Phase.planned;
 	private String datef;
 	private Date creationDate = new Date();
+	private final String id;
 	
-	public Card(String name, String description, String priority) {
+	public Card(String id, String name, String description, String priority, String phase) {
+		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.priority = priority;
 		setFormattedDate(creationDate);
-	}
-	public Card(String name, String description, String priority, String phase) {
-		this(name, description, priority);
 		this.phase = Phase.valueOf(phase);
 	}
 	
 	public Card(HttpServletRequest req) {
-		this.name = req.getParameter("cardName");
-		this.description = req.getParameter("description");
+		this.id = (String)req.getAttribute("id");
+		this.name = req.getParameter("cardName").trim();
+		if (this.name.equals("")) {
+			this.name = "Новая задача";
+		}
+		this.description = req.getParameter("description").trim();
+		if (this.description.equals("")) {
+			this.description = "Здесь должно быть описание";
+		}
 		this.priority = req.getParameter("priority");
 		setFormattedDate(creationDate);
+	}
+	
+	public String getId() {
+		return id;
 	}
 
 	public String getName() {

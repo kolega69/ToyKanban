@@ -3,8 +3,10 @@ package board.hendlers;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import authentication.beans.User;
+import org.bson.types.ObjectId;
+
 import board.beans.Card;
+import board.beans.User;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
@@ -21,12 +23,16 @@ public class NewCardCreator {
 	}
 	
 	public void create() {
+		ObjectId cId = new ObjectId();
+		request.setAttribute("id", cId.toHexString());
 		Card card = new Card(request);
 		
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
 		
-		BasicDBObject dbCard = new BasicDBObject("phase", card.getPhase().toString())
+		
+		BasicDBObject dbCard = new BasicDBObject("_id", cId)
+			.append("phase", card.getPhase().toString())
 			.append("cardName", card.getName())
 			.append("description", card.getDescription())
 			.append("priority", card.getPriority())

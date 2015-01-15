@@ -15,8 +15,8 @@ import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import authentication.beans.User;
 import authentication.handlers.AuthHandler;
+import board.beans.User;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;

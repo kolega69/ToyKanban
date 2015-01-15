@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import board.hendlers.CardRemover;
 import board.hendlers.CardUpdater;
 import board.hendlers.NewCardCreator;
 
@@ -51,10 +52,12 @@ public class BoardManager extends HttpServlet {
 		case "showBoard":
 			session.removeAttribute("action");
 			break;
-		case "toInProgress":
-			new CardUpdater(db, request).update();
-			logger.info("The Card was moved into inProgress phase");
+		case "removeCard":
+			new CardRemover(db, request).remove();
 			break;
+		default:
+			new CardUpdater(db, request).update();
+			logger.info("The Card was updated with action: " + action);
 		}
 		
 		

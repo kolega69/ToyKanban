@@ -1,12 +1,6 @@
-package authentication.beans;
+package board.beans;
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import board.beans.Board;
-import board.beans.Card;
 
 public class User {
 	

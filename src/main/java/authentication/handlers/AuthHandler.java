@@ -3,17 +3,13 @@ package authentication.handlers;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import authentication.beans.User;
 import board.beans.Board;
 import board.beans.Card;
+import board.beans.User;
 
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
@@ -80,13 +76,14 @@ public class AuthHandler {
 		
 		for (Object card : cards) {
 			BasicDBObject c = (BasicDBObject)card;
+			String id = c.getObjectId("_id").toHexString();
 			String phase = c.getString("phase");
 			String cardName = c.getString("cardName");
 			Date cardDate = c.getDate("cardDate");
 			String description = c.getString("description");
 			String priority = c.getString("priority");
 			
-			Card userCard = new Card(cardName, description, priority, phase);
+			Card userCard = new Card(id, cardName, description, priority, phase);
 			userCard.setCreationDate(cardDate);
 			
 			board.add(userCard);
