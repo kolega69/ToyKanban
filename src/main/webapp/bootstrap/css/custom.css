@@ -1,43 +1,9 @@
 body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    padding-top: 5px;
 }
 
 .jumbotron {
     text-align: center;
-}
-
-.back_for_entity {
-    /*background-image: url("../../images/backgrounds/barri_gotic_by_jpgmn.png");*/
-    background-color: #dcdcdc;
-}
-
-.facade_tile {
-    padding: 10px;
-    min-height: 300px;
-    border: 1px solid darkolivegreen;
-    background-color: #c6d6b4;
-    border-radius: 6px;
-}
-
-.facade_tile div {
-    text-align: center;
-}
-
-.btn-bottom {
-
-}
-
-.facade_description {
-    min-height: 100px;
-}
-
-.facade_title {
-    min-height: 150px;
-}
-
-table {
-    padding-top: 200px;
 }
 
 th {
@@ -58,14 +24,32 @@ th {
 	text-align: right;
 }
 
-.date-table {
+.kanban-table {
+	margin-top: 50px;
 	width: 100%;
-	margin-bottom: -10px;
+	table-layout: fixed;
+}
+
+.th-text {
+	display: inline-block;
+}
+
+.btn-pr {
+	padding-top: 3px;
+	padding-bottom: 3px;
+	padding-right: 5px;
+	padding-left: 5px;
+}
+
+thead {
+	background-color: #f8f8f8;
+	
+}
+
+.user-btn {
+	margin-right: 10px;
 }
 
 
 
 
-/*.col-md-6 {
-    padding: 80px;
-}*/
