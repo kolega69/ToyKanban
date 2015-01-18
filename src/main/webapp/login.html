@@ -1,135 +1,132 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
-  <meta charset="UTF-8">
-  <title>Login Page</title>
-  <!-- Bootstrap core CSS -->
-  <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<meta charset="UTF-8">
+<title>Login Page</title>
+<!-- Bootstrap core CSS -->
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-  <!-- Custom styles for this template -->
-  <link href="bootstrap/css/custom.css" rel="stylesheet">
-  <link href="bootstrap/css/signin.css" rel="stylesheet">
+<!-- Custom styles for this template -->
+<link href="bootstrap/css/custom.css" rel="stylesheet">
+<link href="bootstrap/css/signin.css" rel="stylesheet">
 
-  <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+<script src="../../assets/js/ie-emulation-modes-warning.js"></script>
 
-  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-  <!--[if lt IE 9]>
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 </head>
 <body>
-<div class="container">
+  <div class="container">
 
-  <form class="form-signin" role="form" action="auth" method="post">
-    <h2 class="form-signin-heading">Вход на сайт</h2>
-    <input type="hidden" name="action" value="sign_in">
-    <input type="email" id="inputEmail" class="form-control" placeholder="Email адрес" name="email" required autofocus>
-    <input type="password" id="inputPassword" class="form-control" placeholder="Пароль" name="password" required>
-    <div class="checkbox">
-      <label>
-        <input type="checkbox" value="remember-me"> Запомнить меня
-      </label>
-    </div>
-    <div class="alert alert-danger" id="wrong-signin" role="alert">
-       Введенные e-mail или пароль не верны!
-    </div>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
-    <div class="vc vc1 center-block"></div>
-    <div><h5 id="or">ИЛИ</h5></div>
-    <div class="vc vc2 center-block"></div>
+    <form class="form-signin" role="form" action="auth" method="post">
+      <h2 class="form-signin-heading">Вход на сайт</h2>
+      <input type="hidden" name="action" value="sign_in"> <input type="email" id="inputEmail" class="form-control" placeholder="Email адрес" name="email" required autofocus> <input
+        type="password" id="inputPassword" class="form-control" placeholder="Пароль" name="password" required
+      >
+      <div class="checkbox">
+        <label> <input type="checkbox" name="remember" value="yes"> Запомнить меня
+        </label>
+      </div>
+      <div class="alert alert-danger" id="wrong-signin" role="alert">Введенные e-mail или пароль не верны!</div>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
+      <div class="vc vc1 center-block"></div>
+      <div>
+        <h5 id="or">ИЛИ</h5>
+      </div>
+      <div class="vc vc2 center-block"></div>
 
-  </form>
-
-
-  <button class="btn btn-danger center-block btn-toggle">Регистрация</button>
-
-  <form class="form-signup" role="form" method="post" action="auth">
-    <div class="vc vc3 center-block"></div>
-    <div><h5>ИЛИ</h5></div>
-    <div class="vc vc4 center-block"></div>
-
-    <h2 class="form-signin-heading">Регистрация</h2>
-    <input type="hidden" name="action" value="sign_up">
-    <input type="text" id="giveName" class="form-control" placeholder="Имя 3 симв. мин." name="name" required autofocus>
-    <input type="email" id="giveEmail" class="form-control" placeholder="Email адрес" name="email" required>
-    <input type="password" id="givePassword" class="form-control" placeholder="Пароль 6 симв. мин." name="password" required>
-    <div class="alert alert-danger" id="email-exists" role="alert">
-        Данный e-mail уже зарегестрирован!
-    </div>
-    <button class="btn btn-lg btn-primary btn-block" id="registerBtn" type="submit" disabled="disabled">Зарегистрироваться</button>
+    </form>
 
 
-  </form>
+    <button class="btn btn-danger center-block btn-toggle">Регистрация</button>
+
+    <form class="form-signup" role="form" method="post" action="auth">
+      <div class="vc vc3 center-block"></div>
+      <div>
+        <h5>ИЛИ</h5>
+      </div>
+      <div class="vc vc4 center-block"></div>
+
+      <h2 class="form-signin-heading">Регистрация</h2>
+      <input type="hidden" name="action" value="sign_up"> <input type="text" id="giveName" class="form-control" placeholder="Имя 3 симв. мин." name="name" required autofocus> <input
+        type="email" id="giveEmail" class="form-control" placeholder="Email адрес" name="email" required
+      > <input type="password" id="givePassword" class="form-control" placeholder="Пароль 6 симв. мин." name="password" required>
+      <div class="alert alert-danger" id="email-exists" role="alert">Данный e-mail уже зарегестрирован!</div>
+      <button class="btn btn-lg btn-primary btn-block" id="registerBtn" type="submit" disabled="disabled">Зарегистрироваться</button>
 
 
-</div> <!-- /container -->
+    </form>
 
 
-<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+  </div>
+  <!-- /container -->
 
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
-<script>
-  
-  $('.btn-toggle').click(function () {
-    var currentText = $(this).text();
-    if (currentText === "Регистрация") {
-      $(this).text("Войти");
-    } else {
-      $(this).text("Регистрация");
-    }
-    $('.form-signin').slideToggle('slow');
-    $('.form-signup').slideToggle('slow');
-  });
+  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 
-  $('.form-signin').submit(function(e) {
-    var $form = $(this);
-    $.ajax({
-      url: $form.attr('action'),
-      type: $form.attr('method'),
-      data: $form.serialize(),
-      async: false
-    }).done(function (data) {
-      if ('false' === data) {
-        e.preventDefault();
-        $('#wrong-signin').show();
-      }
-    });
-  });
-  
-  //todo proper fields validation
-  $('.form-signup').keyup(function() {
-	  var $form = $(this);
-	  var ok = false;
-	  var nameLen = $('#giveName').val().length;
-	  var passLen = $('#givePassword').val().length;
-	  if (nameLen < 3 || passLen < 6) {
-		$('#registerBtn').attr("disabled", "disabled"); 
-	  } else {
-		$('#registerBtn').removeAttr("disabled");
-	  }
-	  
-  });
-  
-  $('#giveEmail').keyup(function(){
-	  var url = $('.form-signup').attr("action");
-	  var email = $(this).val();
-	  var data = "email=" + email + "&action=check_email&password=111";
-	  $.post(url, data).done(function(data) {
-		  if ('false' === data) {
-			  $('#registerBtn').attr("disabled", "disabled");
-			  $('#email-exists').show();
-		  } else {
-			  $('#registerBtn').removeAttr("disabled");
-			  $('#email-exists').hide();
-		  }
-	  })
-	  
-  });
+  <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
-</script>
+  <script>
+	    $('.btn-toggle').click(function() {
+		var currentText = $(this).text();
+		if (currentText === "Регистрация") {
+		    $(this).text("Войти");
+		} else {
+		    $(this).text("Регистрация");
+		}
+		$('.form-signin').slideToggle('slow');
+		$('.form-signup').slideToggle('slow');
+	    });
+
+	    $('.form-signin').submit(function(e) {
+		var $form = $(this);
+		$.ajax({
+		    url : $form.attr('action'),
+		    type : $form.attr('method'),
+		    data : $form.serialize(),
+		    async : false
+		}).done(function(data) {
+		    if ('false' === data) {
+			e.preventDefault();
+			$('#wrong-signin').show();
+		    }
+		});
+	    });
+
+	    //todo proper fields validation
+	    $('.form-signup').keyup(function() {
+		var $form = $(this);
+		var ok = false;
+		var nameLen = $('#giveName').val().length;
+		var passLen = $('#givePassword').val().length;
+		if (nameLen < 3 || passLen < 6) {
+		    $('#registerBtn').attr("disabled", "disabled");
+		} else {
+		    $('#registerBtn').removeAttr("disabled");
+		}
+
+	    });
+
+	    $('#giveEmail').keyup(function() {
+		var url = $('.form-signup').attr("action");
+		var email = $(this).val();
+		var data = "email=" + email + "&action=check_email&password=111";
+		$.post(url, data).done(function(data) {
+		    if ('false' === data) {
+			$('#registerBtn').attr("disabled", "disabled");
+			$('#email-exists').show();
+		    } else {
+			$('#registerBtn').removeAttr("disabled");
+			$('#email-exists').hide();
+		    }
+		})
+
+	    });
+	</script>
 
 </body>
 </html>

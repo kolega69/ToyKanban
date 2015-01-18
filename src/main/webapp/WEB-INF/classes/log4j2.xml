@@ -5,16 +5,19 @@
     <Console name="Console" target="SYSTEM_OUT">
       <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
     </Console>
-
-    <File name="toyKanbanLog" fileName="${sys:catalina.home}/logs/toy_kanban.log" immediateFlush="true" append="true">
+    <File name="toyKanbanLogInfo" fileName="${sys:catalina.home}/logs/toy_kanban.log" immediateFlush="true" append="true">
         <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
-    </File>             
+    </File>    
+    <File name="toyKanbanLogError" fileName="${sys:catalina.home}/logs/toy_kanban_error.log" immediateFlush="true" append="true">
+        <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+    </File>            
   </appenders>
 
   <loggers>     
     <root level="debug">
-      <appender-ref ref="Console" level="info"/>
-      <appender-ref ref="toyKanbanLog" level="info"/>
+      <appender-ref ref="Console" level="debug"/>
+      <appender-ref ref="toyKanbanLogInfo" level="info"/>
+      <appender-ref ref="toyKanbanLogError" level="error"/>
     </root>    
   </loggers>
 </configuration>
