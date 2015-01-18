@@ -9,13 +9,15 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
 /**
- * Servlet Filter implementation class EncodingFilter
+ * Servlet Filter implementation class @{code EncodingFilter}.
+ * Helps set correct encoding to requests and responses for the
+ * correct work with cyrillic characters;
  */
 public class EncodingFilter implements Filter {
 
  
 
-	/**
+	/** Sets UTF-8 encoding to requests and responses
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {

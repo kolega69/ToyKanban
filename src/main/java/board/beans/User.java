@@ -1,5 +1,6 @@
 package board.beans;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class User {
@@ -34,6 +35,11 @@ public class User {
 
 	public Board getBoard() {
 		return board;
+	}
+	
+	public String getDatef() {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("d-MMM-yyyy");
+		return dateFormat.format(creationDate);
 	}
 	
 }

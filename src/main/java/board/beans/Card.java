@@ -11,7 +11,6 @@ public class Card {
 	private String description;
 	private String priority;
 	private Phase phase = Phase.planned;
-	private String datef;
 	private Date creationDate = new Date();
 	private final String id;
 	
@@ -20,7 +19,6 @@ public class Card {
 		this.name = name;
 		this.description = description;
 		this.priority = priority;
-		setFormattedDate(creationDate);
 		this.phase = Phase.valueOf(phase);
 	}
 	
@@ -35,7 +33,6 @@ public class Card {
 			this.description = "Здесь должно быть описание";
 		}
 		this.priority = req.getParameter("priority");
-		setFormattedDate(creationDate);
 	}
 	
 	public String getId() {
@@ -80,16 +77,11 @@ public class Card {
 
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
-		setFormattedDate(creationDate);
-	}
-	
-	private void setFormattedDate(Date date) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("d-MMM-yyyy");
-		datef = dateFormat.format(date);
 	}
 	
 	public String getDatef() {
-		return datef;
+		SimpleDateFormat dateFormat = new SimpleDateFormat("d-MMM-yyyy");
+		return dateFormat.format(creationDate);
 	}
 	
 	@Override

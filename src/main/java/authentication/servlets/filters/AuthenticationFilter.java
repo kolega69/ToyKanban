@@ -16,16 +16,15 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
- * Servlet Filter implementation class AuthenticationFilter
+ * Servlet Filter implementation class {@code AuthenticationFilter}.
+ * Validates user session. 
  */
 public class AuthenticationFilter implements Filter {
 
 	private final Logger logger = LogManager.getLogger();
 
-	public void destroy() {
-	}
-
 	/**
+	 * Validates user session.
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response,
@@ -43,11 +42,16 @@ public class AuthenticationFilter implements Filter {
 		if (session == null && !(uri.endsWith("html") || uri.endsWith("css") || uri.endsWith("auth"))) {
 			logger.error("Unauthorized access request");
 			res.sendRedirect("login.html");
+		} else if (session != null && (uri.endsWith("board.jsp") || uri.endsWith("html"))) {
+			res.sendRedirect("board");
 		} else {
 			chain.doFilter(request, response);
 		}
 	}
 
+	public void destroy() {
+	}
+	
 	public void init(FilterConfig fConfig) throws ServletException {
 	}
 

@@ -22,7 +22,8 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 
 /**
- * Servlet implementation class Auth
+ * Servlet implementation class {@code Auth}. Works as controller and provide
+ * authorization and authentication actions.
  */
 @WebServlet(name = "Auth", urlPatterns = { "/auth" })
 public class Auth extends HttpServlet {
@@ -30,12 +31,13 @@ public class Auth extends HttpServlet {
 	private final Logger logger = LogManager.getLogger();
 
 	/**
+	 * Provide authorization, authentication and check email actions.
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		
+
 		String action = request.getParameter("action");
 		if (action == null) {
 			logger.info("There are no action parameter, redirect to login page");
@@ -50,36 +52,44 @@ public class Auth extends HttpServlet {
 		DB db = (DB) getServletContext().getAttribute("db");
 		AuthHandler handler = new AuthHandler(db);
 
-		//todo вылизать валидации полей здесь или на странице
+		// todo make perfect validations here or in the login page.
 		try {
 			switch (action) {
-			case "sign_in":
-				User user = handler.getUserIfExists(userEmail, userPassword);
-				if (user == null) {
-					out.print("false");
-				} else {
-					HttpSession session = request.getSession();
-					session.setAttribute("user", user);
-					session.setAttribute("action", "showBoard");
-					response.sendRedirect("board");
-				}
-				break;
-			case "sign_up":
-				String userName = request.getParameter("name").trim();
-				User newUser = handler.createUserIfNotExists(userName,
-						userEmail, userPassword);
-				if (newUser == null) {
-					response.sendRedirect("login.html");
-				} else {
-					request.setAttribute("user", newUser);
-					request.getRequestDispatcher("/welcome.jsp").forward(
-							request, response);
-				}
-				break;
-			case "check_email":
-				BasicDBObject dbUser = handler.getUserByEmail(userEmail);
-				out.print(dbUser == null);
-				break;
+				case "sign_in": // login action
+					User user = handler.getUserIfExists(userEmail, userPassword);
+					if (user == null) {
+						out.print("false");
+					} else {
+						HttpSession session = request.getSession();
+						session.setAttribute("user", user);
+						session.setAttribute("action", "showBoard");
+
+						String remember = request.getParameter("remember");
+						// remember user if checkbox was selected
+						if ("yes".equals(remember)) { 
+							session.setMaxInactiveInterval(0);
+							logger.info("User " + user.getEmail() + " remembered");
+						}
+
+						response.sendRedirect("board");
+					}
+					break;
+				case "sign_up": // registration action
+					String userName = request.getParameter("name").trim();
+					User newUser = handler.createUserIfNotExists(userName,
+							userEmail, userPassword);
+					if (newUser == null) {
+						response.sendRedirect("login.html");
+					} else {
+						request.setAttribute("user", newUser);
+						request.getRequestDispatcher("/welcome.jsp").forward(
+								request, response);
+					}
+					break;
+				case "check_email": //check email action
+					BasicDBObject dbUser = handler.getUserByEmail(userEmail);
+					out.print(dbUser == null);
+					break;
 			}
 
 		} catch (NoSuchAlgorithmException e) {
@@ -93,11 +103,13 @@ public class Auth extends HttpServlet {
 		}
 	}
 
-	@Override
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		resp.sendRedirect("board");
 	}
-	
-	
+
 }

@@ -19,7 +19,9 @@ import board.hendlers.NewCardCreator;
 import com.mongodb.DB;
 
 /**
- * Servlet implementation class BoardManager
+ * Servlet implementation class @{code BoardManager}. Works as controller
+ * and coordinates actions for the creating, updating kanban cards in the
+ * user board and removing them from one.
  */
 @WebServlet(name = "BoardManager", urlPatterns = { "/board" })
 public class BoardManager extends HttpServlet {
@@ -29,12 +31,18 @@ public class BoardManager extends HttpServlet {
    
 	
 	/**
+	 * Manage actions for the creating, updating and removing kanban cards.
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DB db = (DB) getServletContext().getAttribute("db");
 		
 		HttpSession session = request.getSession();
+		if (session.getAttribute("user") == null) {
+			response.sendRedirect("login.html");
+			return;
+		}
+		
 		String action = (String)session.getAttribute("action");
 		if (action == null) {
 			action = (String)request.getParameter("action");
@@ -47,7 +55,6 @@ public class BoardManager extends HttpServlet {
 		switch(action) {
 		case "createCard":
 			new NewCardCreator(db, request).create();
-			logger.info("Was created a new Card");
 			break;
 		case "showBoard":
 			session.removeAttribute("action");
@@ -57,16 +64,13 @@ public class BoardManager extends HttpServlet {
 			break;
 		default:
 			new CardUpdater(db, request).update();
-			logger.info("The Card was updated with action: " + action);
 		}
-		
-		
 		getServletContext().getRequestDispatcher("/board.jsp").forward(request, response);
-		
 	}
 
-
-	@Override
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		doPost(req, resp);

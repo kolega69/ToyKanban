@@ -16,7 +16,8 @@ import org.apache.logging.log4j.Logger;
 import board.beans.User;
 
 /**
- * Servlet implementation class Logout
+ * Servlet implementation class @{code Logout}. Provide logout action
+ * for the user.
  */
 @WebServlet(name = "Logout", urlPatterns = { "/logout" })
 public class Logout extends HttpServlet {
@@ -31,6 +32,8 @@ public class Logout extends HttpServlet {
 	}
 
 	/**
+	 * Make logout for the particular user.
+	 * Invalidates the users sessions and forward them to login page.
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
