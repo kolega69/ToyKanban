@@ -42,8 +42,6 @@ public class AuthenticationFilter implements Filter {
 		if (session == null && !(uri.endsWith("html") || uri.endsWith("css") || uri.endsWith("auth"))) {
 			logger.error("Unauthorized access request");
 			res.sendRedirect("login.html");
-		} else if (session != null && (uri.endsWith("board.jsp") || uri.endsWith("html"))) {
-			res.sendRedirect("board");
 		} else {
 			chain.doFilter(request, response);
 		}

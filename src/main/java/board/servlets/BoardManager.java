@@ -58,6 +58,7 @@ public class BoardManager extends HttpServlet {
 			break;
 		case "showBoard":
 			session.removeAttribute("action");
+			getServletContext().getRequestDispatcher("/board.jsp").forward(request, response);
 			break;
 		case "removeCard":
 			new CardRemover(db, request).remove();
@@ -65,7 +66,7 @@ public class BoardManager extends HttpServlet {
 		default:
 			new CardUpdater(db, request).update();
 		}
-		getServletContext().getRequestDispatcher("/board.jsp").forward(request, response);
+		response.sendRedirect("board");
 	}
 
 	/**

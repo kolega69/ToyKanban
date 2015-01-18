@@ -252,7 +252,7 @@
     <!-- Modal for card creating -->
     <div class="modal fade" id="createCardModal" tabindex="-1" role="dialog" aria-labelledby="createCardLabel" aria-hidden="true">
       <div class="modal-dialog">
-        <form role="form" id="createCard" method="get" action="board"> <!-- Form wrapping modal content and body -->
+        <form role="form" id="createCard" method="post" action="board"> <!-- Form wrapping modal content and body -->
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -301,7 +301,7 @@
   <!-- Modal for card editing -->
   <div class="modal fade" id="editCardModal" tabindex="-1" role="dialog" aria-labelledby="editCardLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <form role="form" id="editCard" method="get" action="board">
+      <form role="form" id="editCard" method="post" action="board">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
