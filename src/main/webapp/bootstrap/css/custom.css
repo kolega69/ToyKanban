@@ -43,11 +43,42 @@ th {
 
 thead {
 	background-color: #f8f8f8;
-	
+	font-family: 'Exo 2', Arial, sans-serif;
+	font-weight: 400;
+	font-size: 18px;
+	color: grey;
 }
 
 .user-btn {
 	margin-right: 10px;
+}
+
+.jumbotron {
+	background-color: #f8f8f8; 
+	font-family: 'Exo 2', Arial, sans-serif;
+}
+
+.jumbotron h3 {
+	font-weight: 400;
+}
+
+.jumbotron p {
+	font-weight: 200;
+	font-size: 20px;
+}
+
+.date {
+	font-family: 'Exo 2', Arial, sans-serif;
+	font-weight: 200;
+	font-size: 12px;
+}
+
+.row {
+	padding-bottom: 0px;
+}
+
+.panel-body {
+	word-wrap: break-word; 
 }
 
 
